@@ -8,7 +8,7 @@ This is a design doc for the implementation that I've come up with.
 2. Activate it `source marvin_env/bin/activate`
 3. Install Swig library `brew install swig`.
 4. `pip install numpy==1.17.2 gym==0.14.0 Box2D==2.3.2 box2d-py==2.3.8`
-5. Copy `gym` directory provided in this repo to `marvin_env/lib/python3.7/site-packages` (with replacement)
+5. Copy `gym` directory provided in this repo to `marvin_env/lib/python3.7/site-packages` (with replacement, like `cp -r gym marvin_env/lib/python3.7/site_packages`)
 6. `import gym`
    `env = gym.make("Marvin-v0")` to create an environment
 7. Other environments should work fine too `env = gym.make("BipedalWalker-v2)"`
