@@ -13,6 +13,8 @@ This is a design doc for the implementation that I've come up with.
    `env = gym.make("Marvin-v0")` to create an environment
 7. Other environments should work fine too `env = gym.make("BipedalWalker-v2)"`
 
+In order to run distributed version you need [Ray](https://github.com/ray-project/ray): `pip install ray psutil`
+
 If you encounter an error, contact me. It's likely that this will break in the future due to dependencies.
 
 ## Server
