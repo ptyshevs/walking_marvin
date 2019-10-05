@@ -15,7 +15,7 @@ class ESSolver:
         self.sigma = sigma
         self.verbose = verbose
     
-    def solve(self, weights=None, fitness_fn=None, n_generations=100, seed=None):
+    def solve(self, weights=None, fitness_fn=None, n_generations=100, seed=None, detailed_log=False):
         """
         If weights is none, simple MLP is assumed, otherwise this should be the list of weights matrices from some model
         """
@@ -41,6 +41,9 @@ class ESSolver:
                 
                 population.append(candidate)
                 rewards.append(reward)
+                if detailed_log:
+                    print(f'[{generation}: {i}/{self.population_size}]: E[R]={reward:.4f}')
+
             
             rewards = np.array(rewards)
             r_mean, r_std = rewards.mean(), rewards.std()

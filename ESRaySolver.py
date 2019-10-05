@@ -57,7 +57,7 @@ class ESRaySolver:
 
         self.workers = [ESWorker.remote(model.layer_sizes, model.seed, env_name, seed) for seed in self.w_seeds]  # actor handles
     
-    def solve(self, weights=None, fitness_fn=None, n_generations=100, seed=None):
+    def solve(self, weights=None, fitness_fn=None, n_generations=100, seed=None, detailed_log=False):
         """
         If weights is none, simple MLP is assumed, otherwise this should be the list of weights matrices from some model
         """

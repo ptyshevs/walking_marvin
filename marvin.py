@@ -5,6 +5,8 @@ import gym
 
 from nn import *
 from ESSolver import *
+from ESRaySolver import *
+
 from viz import render_env
 
 if __name__ == '__main__':
@@ -15,7 +17,6 @@ if __name__ == '__main__':
     parser.add_argument('--multiprocess', '-m', help="Spread training across multiple processes", default=False, action='store_true')
     parser.add_argument('--detailed-log', '-d', default=False, help="Display detailed log", action='store_true')
     args = parser.parse_args()
-    print(args, args.load)
 
     layer_sizes = [24, 24, 4]
     agent = NN(layer_sizes, seed=0)
@@ -41,14 +42,12 @@ if __name__ == '__main__':
     if train_phase:
         # Train the agent
         if args.multiprocess:
-            # Sorry, shitcode here to bypass unncessary activation of ray
-            from ESRaySolver import *
             solver = ESRaySolver(agent, env_name, verbose=True)
         else:
             solver = ESSolver(agent, env_name, verbose=True)
         
-        weights = solver.solve(n_generations=1)
-        agent.set_weights(weights)
+        optimal_weights = solver.solve(detailed_log=args.detailed_log)
+        agent.set_weights(optimal_weights)
 
     if args.save:
         with open(args.save, 'wb') as f:
