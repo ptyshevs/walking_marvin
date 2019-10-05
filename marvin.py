@@ -16,6 +16,7 @@ if __name__ == '__main__':
     parser.add_argument('--save', '-s', help="Save weights to a file after running the program")
     parser.add_argument('--multiprocess', '-m', help="Spread training across multiple processes", default=False, action='store_true')
     parser.add_argument('--detailed-log', '-d', default=False, help="Display detailed log", action='store_true')
+    parser.add_argument('--sonic', default=False, help="--walk, but swiftly", action='store_true')
     args = parser.parse_args()
 
     layer_sizes = [24, 24, 4]
@@ -34,7 +35,12 @@ if __name__ == '__main__':
         except FileNotFoundError:
             print(f"Failed to load file: {args.load}")
             sys.exit(1)
-    
+    if args.sonic:
+        with open("fast_marvin.pcl", 'rb') as f:
+            weights = pcl.load(f)
+            agent.set_weights(weights)
+            train_phase = False
+
     if args.walk:
         train_phase = False
 
