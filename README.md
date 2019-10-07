@@ -19,16 +19,21 @@ If you encounter an error, contact me. It's likely that this will break in the f
 
 ## Server
 
-The purpose of Server is to synchronize progress across multiple Clients as well as distribute work to each of the Client.
-In order to save make transmission lighter, Server work package consists of:
-1. Random seed to be used by a client in order to generate perturbations. This seed is remembered on server-side in order to replicate
-   perturbations during update phase.
-2. Population size
-3. Current model architecture (weights) to be recreated locally
-4. Time limit
+The purpose of Server is to synchronize progress across multiple Clients as well as distribute work to each of the Client. It does so by creating a list of Client actors, initializing them with model architecture, random seed used for model initialization, seed for perturbation generation, and environment identifier.
 
-Client returns:
-1. List of rewards for the given population size
+
+## Client
+Client is initialized with it's personal random seed that is known for Server. When `evaluate` method
+is called, it samples weights perturbation according to it's seed and evaluates model with it, sending
+only the reward back to Server.
+
+Client can run `evaluate` multiple times with perturbation added to the same set of weights.
+
+
+Once Server is done distributing evaluation across Clients, it collects the rewards and reproduces
+perturbations on the client nodes. It then proceeds with performing weights update according with the
+Evolution Strategy. It then broadcasts new weights across all clients by calling `update` method.
+
 
 * [Evolution Strategies as a Scalable Alternative to RL](https://openai.com/blog/evolution-strategies/)
 * [Mirrored Sampling](https://hal.inria.fr/inria-00530202v2/document)

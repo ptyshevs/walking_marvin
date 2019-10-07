@@ -6,14 +6,13 @@ from nn import NN
 from common import *
 
 
-
-def evaluate_model(model, env):
+def evaluate_model(model, env, max_episode_len=1500):
     
     observation = env.reset()
     done = False
     i = 0
     r_sum = 0
-    while not done and i < 1500:
+    while not done and i < max_episode_len:
         action = model.predict(observation)
         observation, reward, done, _ = env.step(action)
         i += 1
