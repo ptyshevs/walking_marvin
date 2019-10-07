@@ -86,7 +86,7 @@ if __name__ == '__main__':
 				print(f"Failed to load file: {args.load}")
 				sys.exit(1)
 	if args.sonic and not args.backprop:
-		with open("fast_marvin.pcl", 'rb') as f:
+		with open("pre_trained/fast_marvin.pcl", 'rb') as f:
 			weights = pcl.load(f)
 			agent.set_weights(weights)
 			train_phase = False
