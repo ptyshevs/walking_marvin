@@ -34,6 +34,6 @@ Once Server is done distributing evaluation across Clients, it collects the rewa
 perturbations on the client nodes. It then proceeds with performing weights update according with the
 Evolution Strategy. It then broadcasts new weights across all clients by calling `update` method.
 
-
+## Bibliography
 * [Evolution Strategies as a Scalable Alternative to RL](https://openai.com/blog/evolution-strategies/)
 * [Mirrored Sampling](https://hal.inria.fr/inria-00530202v2/document)
