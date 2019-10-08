@@ -3,7 +3,7 @@ import gym
 import ray
 
 from nn import NN
-from common import *
+from EScommon import *
 
 
 def evaluate_model(model, env, max_episode_len=1500):
