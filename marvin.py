@@ -60,12 +60,11 @@ if __name__ == '__main__':
 	parser.add_argument('--backprop', default=False, help="Use Backprop-based training", action='store_true')
 	args = parser.parse_args()
 
-	layer_sizes = [24, 24, 4]
-
 	if args.backprop:
 		agent = NNBackProp()
 		agent.init_nn()
 	else:
+		layer_sizes = [24, 24, 4]
 		agent = NN(layer_sizes, seed=0)
 
 	env_name = "Marvin-v0"
