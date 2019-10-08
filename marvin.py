@@ -44,9 +44,8 @@ def render_backprop(nn, env):
 	while not done:
 		env.render()
 		observation = np.array(observation).reshape((24,1))
-		observation_arr.append(observation)
 
-		action = nn.nn_prop(observation).reshape((4))
+		action = nn.predict(observation).reshape((4))
 		observation, reward, done, info = env.step(action)
 
 
@@ -76,6 +75,7 @@ if __name__ == '__main__':
 	if args.load is not None:
 		if args.backprop:
 			agent.load_weights(args.load)
+			train_phase = False
 		else:
 			try:
 				with open(args.load, 'rb') as f:
