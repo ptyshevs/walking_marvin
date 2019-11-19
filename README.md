@@ -17,6 +17,7 @@ In order to run distributed version you need [Ray](https://github.com/ray-projec
 
 If you encounter an error, contact me. It's likely that this will break in the future due to dependencies.
 
+![gif](ezgif-1-f3294c3febd5.gif)
 ## Server
 
 The purpose of Server is to synchronize progress across multiple Clients as well as distribute work to each of the Client. It does so by creating a list of Client actors, initializing them with model architecture, random seed used for model initialization, seed for perturbation generation, and environment identifier.
